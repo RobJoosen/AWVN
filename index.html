@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exact Online OAuth Redirect</title>
+</head>
+<body>
+  <h2>Exact Online Auth Redirect Builder</h2>
+  <form id="authForm">
+    <label>Client ID:<br/><input type="text" id="client_id" required></label><br/><br/>
+    <label>Redirect URI:<br/><input type="text" id="redirect_uri" required></label><br/><br/>
+    <label>Response Type:<br/>
+      <select id="response_type">
+        <option value="code">code</option>
+        <option value="token">token</option>
+      </select>
+    </label><br/><br/>
+    <label>Force Login:<br/>
+      <select id="force_login">
+        <option value="0">0 (no)</option>
+        <option value="1">1 (yes)</option>
+      </select>
+    </label><br/><br/>
+    <button type="submit">Go to Exact Online</button>
+  </form>
+
+  <script>
+    document.getElementById('authForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const clientId = encodeURIComponent(document.getElementById('client_id').value);
+      const redirectUri = encodeURIComponent(document.getElementById('redirect_uri').value);
+      const responseType = encodeURIComponent(document.getElementById('response_type').value);
+      const forceLogin = encodeURIComponent(document.getElementById('force_login').value);
+
+      const url = `https://start.exactonline.nl/api/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&force_login=${forceLogin}`;
+
+      window.location.href = url;
+    });
+  </script>
+</body>
+</html>
